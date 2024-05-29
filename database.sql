@@ -6,20 +6,20 @@ GO
 
 CREATE TABLE Penalidade(
 
-    cnpj VARCHAR NOT NULL,
-    razao_social VARCHAR,
-    nome_motorista VARCHAR,
-    cpf VARCHAR,
+    cnpj VARCHAR(18) NOT NULL,
+    razao_social VARCHAR(40),
+    nome_motorista VARCHAR(30),
+    cpf VARCHAR(14),
     vigencia_do_cadastro DATE
 );
     
 GO
 CREATE OR ALTER PROC InserirPenalidade
 
-    @cnpj VARCHAR,
-    @razao_social VARCHAR,
-    @nome_motorista VARCHAR,
-    @cpf VARCHAR,
+    @cnpj VARCHAR(18),
+    @razao_social VARCHAR(40),
+    @nome_motorista VARCHAR(30),
+    @cpf VARCHAR(14),
     @vigencia_do_cadastro VARCHAR(10)
     AS
     BEGIN
@@ -30,4 +30,5 @@ CREATE OR ALTER PROC InserirPenalidade
             VALUES (@cnpj, @razao_social, @nome_motorista, @cpf, @data_criacao);
 END;
 
+select count(*) from Penalidade;
 select * from Penalidade;

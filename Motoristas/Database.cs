@@ -9,6 +9,7 @@ namespace Motoristas
 
         public static void SaveData(List<PenalidadesAplicadas> list)
         {
+            int total = 0;
             bool erro = false;
             try
             {
@@ -19,17 +20,19 @@ namespace Motoristas
                 {
                     using var proc = new SqlCommand("InserirPenalidade", conexao)
                     {
-                        CommandType = CommandType.StoredProcedure,
                         Parameters =
                         {
-                        new SqlParameter("@cnpj", item.Cnpj),
-                        new SqlParameter("@razao_social", item.RazaoSocial),
-                        new SqlParameter("@nome_motorista", item.NomeMotorista),
-                        new SqlParameter("@cpf", item.Cpf),
-                        new SqlParameter("@vigencia_do_cadastro", DateOnly.FromDateTime(item.VigenciaCadastro).ToString())
-                        }
+                            new SqlParameter("@cnpj", item.Cnpj),
+                            new SqlParameter("@razao_social", item.RazaoSocial),
+                            new SqlParameter("@nome_motorista", item.NomeMotorista),
+                            new SqlParameter("@cpf", item.Cpf),
+                            new SqlParameter("@vigencia_do_cadastro", DateOnly.FromDateTime(item.VigenciaCadastro).ToString())
+                        },
+                        CommandType = CommandType.StoredProcedure
                     };
                     proc.ExecuteNonQuery();
+                    total++;
+                    Console.WriteLine("Total de linhas inseridas no banco: " + total);
                 }
 
                 conexao.Close();

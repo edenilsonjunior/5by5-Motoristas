@@ -4,10 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Leitura de json");
-
             var lst = ReadFile.GetData(@"C:\teste_json\motoristas_habilitados.json");
 
+            
             bool sair = false;
 
             while (!sair)
@@ -46,6 +45,7 @@
                 Console.WriteLine("Digite qualquer tecla para continuar...");
                 Console.ReadKey();
             }
+            
         }
 
         private static int Menu()
