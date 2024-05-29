@@ -6,7 +6,7 @@
         {
             var lst = ReadFile.GetData(@"C:\teste_json\motoristas_habilitados.json");
 
-            
+
             bool sair = false;
 
             while (!sair)
@@ -34,6 +34,10 @@
                     case 6:
                         Database.SaveData(lst);
                         break;
+                    case 7:
+                        Console.WriteLine($"=====Arquivo XML=====\n\n");
+                        Console.WriteLine(TestFilters.GenerateXML(lst));
+                        break;
                     case 0:
                         sair = true;
                         break;
@@ -45,7 +49,7 @@
                 Console.WriteLine("Digite qualquer tecla para continuar...");
                 Console.ReadKey();
             }
-            
+
         }
 
         private static int Menu()
@@ -58,6 +62,7 @@
             Console.WriteLine("4- Quantas empresas tem no nome da razao social a descricao LTDA:");
             Console.WriteLine("5- Ordenar a lista de registros pela razao social");
             Console.WriteLine("6- Salvar dados no banco de dados");
+            Console.WriteLine("7- Gerar XML");
             Console.WriteLine("0- Sair");
             Console.WriteLine($"=================================");
 

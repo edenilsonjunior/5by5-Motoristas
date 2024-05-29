@@ -9,12 +9,12 @@ namespace Motoristas
         {
             using StreamReader r = new StreamReader(path);
             string jsonStr = r.ReadToEnd();
-            
+
             var lst = JsonConvert.DeserializeObject<MotoristaHabilitado>(jsonStr, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
 
             if (lst == null)
                 return null;
-            
+
             return lst.PenalidadesAplicadas;
         }
 

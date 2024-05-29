@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Xml.Linq;
 
 namespace Motoristas
 {
@@ -24,6 +20,26 @@ namespace Motoristas
             {
                 Console.WriteLine(item);
             }
+        }
+
+        public static string GenerateXML(List<PenalidadesAplicadas> lst)
+        {
+            if (lst.Count == 0)
+                return "Nao existe registros na lista!";
+
+
+
+            var penalidadeAplicada = new XElement("Root", from data in lst
+                                                          select new XElement("motorista",
+                                                              new XElement("razao_social", data.RazaoSocial),
+                                                              new XElement("cnpj", data.Cnpj),
+                                                              new XElement("nome_motorista", data.NomeMotorista),
+                                                              new XElement("cpf", data.Cpf),
+                                                              new XElement("vigencia_do_cadastro", data.VigenciaCadastro)
+                                                          )
+                                                        );
+            return penalidadeAplicada.ToString();
+
         }
     }
 }
