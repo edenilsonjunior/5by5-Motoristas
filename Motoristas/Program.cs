@@ -6,7 +6,6 @@
         {
             var lst = ReadFile.GetData(@"C:\teste_json\motoristas_habilitados.json");
 
-
             bool sair = false;
 
             while (!sair)
@@ -30,11 +29,16 @@
                     case 5:
                         Console.WriteLine($"=====Ordenar a lista de registros pela razao social=====\n\n");
                         TestFilters.PrintData(TestFilters.OrderByRazaoSocial(lst));
+                        
                         break;
                     case 6:
-                        Database.SaveData(lst);
+                        DatabaseSql.SaveData(lst);
                         break;
                     case 7:
+                        DatabaseMongo.ProcessDataToMongoDB();
+                        Console.WriteLine("Dados salvos no mongoDB!");
+                        break;
+                    case 8:
                         Console.WriteLine($"=====Arquivo XML=====\n\n");
                         Console.WriteLine(TestFilters.GenerateXML(lst));
                         break;
@@ -45,11 +49,9 @@
                         Console.WriteLine("Resposta invalida!");
                         break;
                 }
-
                 Console.WriteLine("Digite qualquer tecla para continuar...");
                 Console.ReadKey();
             }
-
         }
 
         private static int Menu()
@@ -61,8 +63,9 @@
             Console.WriteLine("3- Registros que tenham o ano de vigencia igual a 2021");
             Console.WriteLine("4- Quantas empresas tem no nome da razao social a descricao LTDA:");
             Console.WriteLine("5- Ordenar a lista de registros pela razao social");
-            Console.WriteLine("6- Salvar dados no banco de dados");
-            Console.WriteLine("7- Gerar XML");
+            Console.WriteLine("6- Salvar dados no SQL Server");
+            Console.WriteLine("7- Salvar dados no MongoDB");
+            Console.WriteLine("8- Gerar XML");
             Console.WriteLine("0- Sair");
             Console.WriteLine($"=================================");
 
